@@ -7,7 +7,9 @@ Unity 2021.3.4f1
 
 # Version
 ## 最新Version
-[0.0.4](https://github.com/ayaha401/VertToonShader/releases/tag/v.0.0.4)
+[0.0.5](https://github.com/ayaha401/VertToonShader/releases/tag/v.0.0.5)
 ## 安定Version
-[v.0.0.1](https://github.com/ayaha401/VertToonShader/releases/tag/alpha)
+[v.0.0.1](https://github.com/ayaha401/VertToonShader/releases/tag/v.0.0.5)
+
+# ドキュメント
 * [VertToon_Water](https://github.com/ayaha401/VertToonShader/wiki/VertToon_Water)
