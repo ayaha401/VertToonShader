@@ -7,9 +7,6 @@ Shader "VertToon/Opaque_Stencil_R"
         _Color("Color", Color) = (1, 1, 1, 1)
         _HideColor("Hide Color", Color) = (0.8, 0.8, 0.8, 1)
         [Toggle] _UseVertColor ("Use vertex Color", int) = 1
-
-        // AdvancedSetting
-        _StencilNum("Stencil Number", int) = 1
     }
 
     SubShader
@@ -40,6 +37,16 @@ Shader "VertToon/Opaque_Stencil_R"
             ColorMask 0
             ZTest Always
             ZWrite Off
+
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #pragma multi_compile_instancing
+            #pragma target 4.5
+            #pragma enable_d3d11_debug_symbols
+            
+            #include "../VertToon/HLSL/Toon/VertToon_StencilWrite.hlsl"
+            ENDHLSL
         }
 
         // ForwardPass
