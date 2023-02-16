@@ -6,6 +6,7 @@ CBUFFER_START(UnityPerMaterial)
 uniform float4 _MainTex_ST;
 uniform float4 _Color;
 uniform int _UseVertColor;
+uniform float3 _HideColor;
 
 CBUFFER_END
 

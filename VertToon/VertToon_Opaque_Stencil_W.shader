@@ -1,4 +1,4 @@
-Shader "VertToon/Opaque"
+Shader "VertToon/Opaque_Stencil_W"
 {
     Properties
     {
@@ -32,6 +32,13 @@ Shader "VertToon/Opaque"
             }
             Cull Off
             ZWrite ON
+
+            Stencil
+            {
+                Ref 1
+                Comp Always
+                Pass Replace
+            }
 
             HLSLPROGRAM
             #pragma vertex vert

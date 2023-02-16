@@ -15,8 +15,14 @@ Shader "VertToon/Water"
             "IgnoreProjector" = "True"
             "Queue" = "Transparent"
         }
+        Stencil
+        {
+            Ref 2
+            Comp NotEqual
+        }
         LOD 100
 
+        // ForwardPass
         Pass
         {
             Name "Universal Forward"
