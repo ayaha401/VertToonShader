@@ -5,10 +5,7 @@ Shader "VertToon/Opaque"
         // Main
         _MainTex("Main Texture", 2D) = "white"{}
         _Color("Color", Color) = (1, 1, 1, 1)
-        [Toggle] _UseVertColor ("Use vertex Color", int) = 1
-
-        // AdvancedSetting
-        _StencilNum("Stencil Number", int) = 1
+        [Toggle] _UseVertColor("Use vertex Color", int) = 1
     }
 
     SubShader
@@ -93,4 +90,5 @@ Shader "VertToon/Opaque"
             ENDHLSL
         }
     }
+    CustomEditor "AyahaShader.VertToon.VertToonGUI"
 }
