@@ -11,9 +11,9 @@ Shader "VertToon/Water"
         Tags
         {
             "RenderPipeline" = "UniversalPipeline"
-            "RenderType" = "Transparent"
+            "RenderType" = "Opaque"
             "IgnoreProjector" = "True"
-            "Queue" = "Transparent"
+            "Queue" = "Geometry"
         }
         Stencil
         {

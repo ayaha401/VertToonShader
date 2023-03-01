@@ -6,6 +6,10 @@ Shader "VertToon/Opaque_Stencil_W"
         _MainTex("Main Texture", 2D) = "white"{}
         _Color("Color", Color) = (1, 1, 1, 1)
         [Toggle] _UseVertColor("Use vertex Color", int) = 1
+
+        // OtherSetting
+        [Enum(Off,0 ,Front,1, Back,2)] _CullingMode("Culling", int) = 0
+        // _BayerTex("Bayer Texture", 2D) = "white"{}
     }
 
     SubShader
@@ -27,7 +31,7 @@ Shader "VertToon/Opaque_Stencil_W"
             {
                 "LightMode" = "UniversalForward"
             }
-            Cull Off
+            Cull [_CullingMode]
             ZWrite ON
 
             Stencil
@@ -81,7 +85,7 @@ Shader "VertToon/Opaque_Stencil_W"
                 "LightMode" = "DepthOnly"
             }
 
-            Cull Off
+            Cull [_CullingMode]
             ZWrite On
             ColorMask 0
 

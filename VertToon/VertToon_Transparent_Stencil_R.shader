@@ -1,4 +1,4 @@
-Shader "VertToon/Opaque_Stencil_R"
+Shader "VertToon/Transparent_Stencil_R"
 {
     Properties
     {
@@ -10,18 +10,17 @@ Shader "VertToon/Opaque_Stencil_R"
 
         // OtherSetting
         [Enum(Off,0 ,Front,1, Back,2)] _CullingMode("Culling", int) = 0
-        // _BayerTex("Bayer Texture", 2D) = "white"{}
     }
-
     SubShader
     {
-        Tags 
+        Tags
         {
             "RenderPipeline" = "UniversalPipeline"
-            "RenderType" = "Opaque"
+            "RenderType" = "Transparent"
             "IgnoreProjector" = "True"
-            "Queue" = "Geometry"
+            "Queue" = "Transparent"
         }
+        Blend SrcAlpha OneMinusSrcAlpha
         LOD 100
 
         // StencilWritePass
@@ -78,6 +77,8 @@ Shader "VertToon/Opaque_Stencil_R"
             #pragma target 4.5
             #pragma enable_d3d11_debug_symbols
 
+            #define TRANSPARENT
+
             #include "../VertToon/HLSL/Toon/VertToon_Core.hlsl"
             ENDHLSL
         }
@@ -106,56 +107,6 @@ Shader "VertToon/Opaque_Stencil_R"
             #pragma enable_d3d11_debug_symbols
 
             #include "../VertToon/HLSL/Toon/VertToon_HideStencil.hlsl"
-            ENDHLSL
-        }
-
-        // ShadowPass
-        Pass
-        {
-            Name "ShadowCaster"
-            Tags
-            {
-                "LightMode" = "ShadowCaster"
-            }
-
-            Cull Back
-            ZWrite On
-            ZTest LEqual
-
-            HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma multi_compile_instancing
-            #pragma target 4.5
-            #pragma enable_d3d11_debug_symbols
-
-            #include "../VertToon/HLSL/Toon/VertToon_ShadowCaster.hlsl"
-            ENDHLSL
-        }
-
-        // DepthPass
-        Pass
-        {
-            Name "DepthOnly"
-            Tags
-            {
-                "LightMode" = "DepthOnly"
-            }
-
-            Cull [_CullingMode]
-            ZWrite On
-            ZTest LEqual
-            ColorMask 0
-
-            HLSLPROGRAM
-            #pragma target 4.5
-
-            #pragma vertex depthOnlyVertex
-            #pragma fragment depthOnlyFragment
-
-            #pragma multi_compile_instancing
-
-            #include "../VertToon/HLSL/Toon/VertToon_DepthOnly.hlsl"
             ENDHLSL
         }
     }

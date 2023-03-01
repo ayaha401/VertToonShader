@@ -12,6 +12,11 @@ namespace AyahaShader.VertToon
         private MaterialProperty hideColor;
         private MaterialProperty useVertColor;
 
+        // OtherSetting
+        private MaterialProperty cullingMode;
+
+        private bool otherSettingFoldoutOpen = false;
+
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] prop)
         {
             var material = (Material)materialEditor.target;
@@ -38,6 +43,19 @@ namespace AyahaShader.VertToon
                 }
             }
             EditorGUI.indentLevel--;
+
+            // OtherSetting
+            otherSettingFoldoutOpen = VertToonCustomUI.Foldout("OtherSetting", otherSettingFoldoutOpen);
+            if(otherSettingFoldoutOpen)
+            {
+                EditorGUI.indentLevel++;
+                using (new EditorGUILayout.VerticalScope(GUI.skin.box))
+                {
+                    materialEditor.ShaderProperty(cullingMode, new GUIContent("Culling Mode"));
+                    materialEditor.RenderQueueField();
+                }
+                EditorGUI.indentLevel--;
+            }
         }
 
         private void FindProperties(MaterialProperty[] prop)
@@ -46,6 +64,9 @@ namespace AyahaShader.VertToon
             color = FindProperty("_Color", prop, false);
             hideColor = FindProperty("_HideColor", prop, false);
             useVertColor = FindProperty("_UseVertColor", prop, false);
+
+            // OtherSetting
+            cullingMode = FindProperty("_CullingMode", prop, false);
         }
     }
 }
