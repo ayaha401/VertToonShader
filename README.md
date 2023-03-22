@@ -12,4 +12,6 @@ Unity 2021.3.4f1
 [v.0.0.5](https://github.com/ayaha401/VertToonShader/releases/tag/v.0.0.5)
 
 # ドキュメント
-* [VertToon_Water](https://github.com/ayaha401/VertToonShader/wiki/VertToon_Water)
+* [VertToon_Opaque](https://github.com/ayaha401/VertToonShader/blob/main/MD/VertToon_Opaque.md)
+* [VertToon_Transparent](https://github.com/ayaha401/VertToonShader/blob/main/MD/VertToon_Transparent.md)
+* [VertToon_Water](https://github.com/ayaha401/VertToonShader/blob/main/MD/VertToon_Water.md)
