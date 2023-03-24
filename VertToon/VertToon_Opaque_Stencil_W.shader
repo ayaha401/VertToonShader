@@ -9,7 +9,7 @@ Shader "VertToon/Opaque_Stencil_W"
 
         // OtherSetting
         [Enum(Off,0 ,Front,1, Back,2)] _CullingMode("Culling", int) = 0
-        // _BayerTex("Bayer Texture", 2D) = "white"{}
+        [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest("ZTest", Float) = 4
     }
 
     SubShader
@@ -33,6 +33,7 @@ Shader "VertToon/Opaque_Stencil_W"
             }
             Cull [_CullingMode]
             ZWrite ON
+            ZTest [_ZTest]
 
             Stencil
             {

@@ -14,6 +14,7 @@ namespace AyahaShader.VertToon
 
         // OtherSetting
         private MaterialProperty cullingMode;
+        private MaterialProperty zTest;
 
         private bool otherSettingFoldoutOpen = false;
 
@@ -33,14 +34,11 @@ namespace AyahaShader.VertToon
             EditorGUI.indentLevel++;
             using (new EditorGUILayout.VerticalScope(GUI.skin.box))
             {
-                materialEditor.TexturePropertySingleLine(new GUIContent("Main Texture"), mainTex);
-                materialEditor.ShaderProperty(color, new GUIContent("Color"));
-                materialEditor.ShaderProperty(useVertColor, new GUIContent("Use Vertex Color"));
+                if(mainTex != null) materialEditor.TexturePropertySingleLine(new GUIContent("Main Texture"), mainTex);
+                if(color != null) materialEditor.ShaderProperty(color, new GUIContent("Color"));
+                if(useVertColor != null) materialEditor.ShaderProperty(useVertColor, new GUIContent("Use Vertex Color"));
 
-                if(hideColor != null)
-                {
-                    materialEditor.ShaderProperty(hideColor, new GUIContent("Hide Color"));
-                }
+                if(hideColor != null) materialEditor.ShaderProperty(hideColor, new GUIContent("Hide Color"));
             }
             EditorGUI.indentLevel--;
 
@@ -51,8 +49,9 @@ namespace AyahaShader.VertToon
                 EditorGUI.indentLevel++;
                 using (new EditorGUILayout.VerticalScope(GUI.skin.box))
                 {
-                    materialEditor.ShaderProperty(cullingMode, new GUIContent("Culling Mode"));
+                    if(cullingMode != null) materialEditor.ShaderProperty(cullingMode, new GUIContent("Culling Mode"));
                     materialEditor.RenderQueueField();
+                    if(zTest != null) materialEditor.ShaderProperty(zTest, new GUIContent("ZTest"));
                 }
                 EditorGUI.indentLevel--;
             }
@@ -67,6 +66,7 @@ namespace AyahaShader.VertToon
 
             // OtherSetting
             cullingMode = FindProperty("_CullingMode", prop, false);
+            zTest = FindProperty("_ZTest", prop, false);
         }
     }
 }

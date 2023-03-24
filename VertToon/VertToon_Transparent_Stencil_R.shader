@@ -9,7 +9,8 @@ Shader "VertToon/Transparent_Stencil_R"
         [Toggle] _UseVertColor("Use vertex Color", int) = 1
 
         // OtherSetting
-        [Enum(Off,0 ,Front,1, Back,2)] _CullingMode("Culling", int) = 0
+        [Enum(Off,0, Front,1, Back,2)] _CullingMode("Culling", int) = 0
+        [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest("ZTest", Float) = 8
     }
     SubShader
     {
@@ -38,7 +39,7 @@ Shader "VertToon/Transparent_Stencil_R"
                 Pass IncrSat
             }
             ColorMask 0
-            ZTest Always
+            ZTest [_ZTest]
             ZWrite Off
             Cull [_CullingMode]
 

@@ -6,6 +6,10 @@ Shader "VertToon/Opaque"
         _MainTex("Main Texture", 2D) = "white"{}
         _Color("Color", Color) = (1, 1, 1, 1)
         [Toggle] _UseVertColor("Use vertex Color", int) = 1
+
+        // OtherSetting
+        [Enum(Off,0, Front,1, Back,2)] _CullingMode("Culling", int) = 0
+        [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest("ZTest", Float) = 4
     }
 
     SubShader
@@ -27,8 +31,9 @@ Shader "VertToon/Opaque"
             {
                 "LightMode" = "UniversalForward"
             }
-            Cull Off
+            Cull [_CullingMode]
             ZWrite ON
+            ZTest [_ZTest]
 
             HLSLPROGRAM
             #pragma vertex vert
