@@ -7,9 +7,9 @@ Unity 2021.3.4f1
 
 # Version
 ## 最新Version
-[v.0.1.0](https://github.com/ayaha401/VertToonShader/releases/tag/v.0.1.0)
+[v.0.1.1](https://github.com/ayaha401/VertToonShader/releases/tag/v.0.1.1)
 ## 安定Version
-[v.0.0.5](https://github.com/ayaha401/VertToonShader/releases/tag/v.0.0.5)
+[v.0.1.1](https://github.com/ayaha401/VertToonShader/releases/tag/v.0.1.1)
 
 # ドキュメント
 * [VertToon_Opaque](https://github.com/ayaha401/VertToonShader/blob/main/MD/VertToon_Opaque.md)
