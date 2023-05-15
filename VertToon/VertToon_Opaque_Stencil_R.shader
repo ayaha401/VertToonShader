@@ -5,6 +5,7 @@ Shader "VertToon/Opaque_Stencil_R"
         // Main
         _MainTex("Main Texture", 2D) = "white"{}
         _Color("Color", Color) = (1, 1, 1, 1)
+        [Toggle] _UseHideColor("Use Hide Color", int) = 1
         _HideColor("Hide Color", Color) = (0.8, 0.8, 0.8, 1)
         [Toggle] _UseVertColor("Use vertex Color", int) = 1
 

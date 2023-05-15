@@ -21,17 +21,12 @@ struct Varyings
     float4 vertColor : COLOR;
     float3 normalWS : NORML;
     float4 lightDirWS : TEXCOORD1; // w : 未使用
-    // float2 screenPos : TEXCOORD2;
-    // float3 posWS : TEXCOORD3;
 
     UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
 // Main
 uniform sampler2D _MainTex;
-
-// OtherSetting
-// uniform sampler2D _BayerTex;
 
 // CBUFFER
 #include "../VertToon/HLSL/Toon/VertToon_Input.hlsl"

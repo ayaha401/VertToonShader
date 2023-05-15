@@ -9,6 +9,7 @@ namespace AyahaShader.VertToon
     {
         private MaterialProperty mainTex;
         private MaterialProperty color;
+        private MaterialProperty useHideColor;
         private MaterialProperty hideColor;
         private MaterialProperty useVertColor;
 
@@ -38,6 +39,7 @@ namespace AyahaShader.VertToon
                 if(color != null) materialEditor.ShaderProperty(color, new GUIContent("Color"));
                 if(useVertColor != null) materialEditor.ShaderProperty(useVertColor, new GUIContent("Use Vertex Color"));
 
+                if (useHideColor != null) materialEditor.ShaderProperty(useHideColor, new GUIContent("Use Hide Color"));
                 if(hideColor != null) materialEditor.ShaderProperty(hideColor, new GUIContent("Hide Color"));
             }
             EditorGUI.indentLevel--;
@@ -61,6 +63,7 @@ namespace AyahaShader.VertToon
         {
             mainTex = FindProperty("_MainTex", prop, false);
             color = FindProperty("_Color", prop, false);
+            useHideColor = FindProperty("_UseHideColor", prop, false);
             hideColor = FindProperty("_HideColor", prop, false);
             useVertColor = FindProperty("_UseVertColor", prop, false);
 

@@ -9,6 +9,7 @@ namespace AyahaShader.Provider
     {
         private static string colorProp = "_Color";
         private static string useVertColorProp = "_UseVertColor";
+        private static string useHideColorProp = "_UseHideColor";
         private static string hideColorProp = "_HideColor";
 
         /// <summary>
@@ -51,6 +52,27 @@ namespace AyahaShader.Provider
         public static bool isUseVertColor(Renderer renderer, MaterialPropertyBlock materialPropertyBlock)
         {
             return ProviderCommon.GetBool(renderer, materialPropertyBlock, useVertColorProp);
+        }
+
+        /// <summary>
+        /// 隠れている時の色を使用するか設定する
+        /// </summary>
+        /// <param name="renderer">renderer</param>
+        /// <param name="materialPropertyBlock">materialPropertyBlock</param>
+        /// <param name="enable">使うか？</param>
+        public static void SetUseHideColor(Renderer renderer, MaterialPropertyBlock materialPropertyBlock, bool enable)
+        {
+            ProviderCommon.SetBool(renderer, materialPropertyBlock, useHideColorProp, enable);
+        }
+
+        /// <summary>
+        /// 隠れている色を使用しているか取得する
+        /// </summary>
+        /// <param name="renderer">renderer</param>
+        /// <param name="materialPropertyBlock">materialPropertyBlock</param>
+        public static bool isUseHideColor(Renderer renderer, MaterialPropertyBlock materialPropertyBlock)
+        {
+            return ProviderCommon.GetBool(renderer, materialPropertyBlock, useHideColorProp);
         }
 
         /// <summary>

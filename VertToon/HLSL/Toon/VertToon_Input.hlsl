@@ -5,6 +5,7 @@ CBUFFER_START(UnityPerMaterial)
     uniform float4 _MainTex_ST;
     uniform float4 _Color;
     uniform int _UseVertColor;
+    uniform int _UseHideColor;
     uniform float3 _HideColor;
     // uniform float4 _BayerTex_TexelSize;
 CBUFFER_END

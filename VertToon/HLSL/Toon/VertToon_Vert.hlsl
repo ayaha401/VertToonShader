@@ -11,8 +11,6 @@ Varyings vert(Attributes v)
     // pos
     VertexPositionInputs vertexInput = GetVertexPositionInputs(v.positionOS.xyz);
     o.positionHCS = vertexInput.positionCS;
-    // o.screenPos = vertexInput.positionNDC;
-    // o.posWS = vertexInput.positionWS;
 
     // uv
     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
