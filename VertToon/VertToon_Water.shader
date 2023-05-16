@@ -29,11 +29,15 @@ Shader "VertToon/Water"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
             #pragma target 4.5
             #pragma enable_d3d11_debug_symbols
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/SimpleLitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
             struct Attributes
             {
@@ -45,6 +49,7 @@ Shader "VertToon/Water"
                 float4 positionHCS : SV_POSITION;
                 float4 screenPos : TEXCOORD0;
                 float3 positionVS : TEXCOORD1;
+                float3 positionWS : TEXCOORD2;
             };
 
             CBUFFER_START(UnityPerMaterial)
@@ -62,6 +67,7 @@ Shader "VertToon/Water"
                 o.positionHCS = vertexInput.positionCS;
                 o.positionVS = vertexInput.positionVS;
                 o.screenPos = vertexInput.positionNDC;
+                o.positionWS = vertexInput.positionWS;
 
                 return o;
             }
@@ -89,6 +95,11 @@ Shader "VertToon/Water"
 
                 // LastColor
                 lastCol = float4(lerp(_WaterColor, foamColor, foam), 1);
+                float4 shadowCoord = TransformWorldToShadowCoord(i.positionWS);
+                Light mainLight = GetMainLight(shadowCoord);
+
+                lastCol = float4(lerp((float3).3 * lastCol.rgb, lastCol.rgb, mainLight.shadowAttenuation), 1.);
+
                 return lastCol;
             }
             ENDHLSL

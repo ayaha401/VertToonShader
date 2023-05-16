@@ -6,7 +6,7 @@ namespace AyahaShader.VertToon
 {
     public class VertToonInfo : MonoBehaviour
     {
-        private static string version = "0.2.0";
+        private static string version = "0.3.0";
         private static string repositoryLink = "https://github.com/ayaha401/VertToonShader";
 
         /// <summary>

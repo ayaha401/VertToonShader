@@ -21,7 +21,8 @@ struct Varyings
     float4 vertColor : COLOR;
     float3 normalWS : NORML;
     float4 lightDirWS : TEXCOORD1; // w : 未使用
-
+    float3 positionWS : TEXCOORD2;
+    
     UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
@@ -80,19 +81,20 @@ float4 frag(Varyings i) : SV_Target
         // Normal
         float3 normalWS = i.normalWS;
 
-        // Light
-        float3 lightDirWS = i.lightDirWS.xyz;
-
         // Albedo
         float3 mainTexColor = tex2D(_MainTex, i.uv).rgb;
         hideColor.rgb = mainTexColor;
         hideColor *= i.vertColor;
 
-        // Diff
-        float NdotL = dot(normalWS, lightDirWS);
-        float halfLambert = NdotL * 0.5 + 0.5;
-        float diff = halfLambert;
-        hideColor.rgb *= diff;
+        // Light
+        float4 shadowCoord = TransformWorldToShadowCoord(i.positionWS);
+        Light mainLight = GetMainLight(shadowCoord);
+        float3 attenuatedLightColor = mainLight.color * (mainLight.distanceAttenuation * mainLight.shadowAttenuation);
+        
+        // Diffuse
+        float3 diffuseColor = LightingLambert(attenuatedLightColor, mainLight.direction, normalWS);            
+        diffuseColor = diffuseColor * 0.5 + 0.5;
+        hideColor.rgb *= diffuseColor;
     }
     
     return float4(hideColor, 1);

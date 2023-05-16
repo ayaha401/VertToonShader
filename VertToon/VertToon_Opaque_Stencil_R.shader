@@ -75,6 +75,8 @@ Shader "VertToon/Opaque_Stencil_R"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
             #pragma multi_compile_instancing
             #pragma target 4.5
             #pragma enable_d3d11_debug_symbols
@@ -150,10 +152,8 @@ Shader "VertToon/Opaque_Stencil_R"
 
             HLSLPROGRAM
             #pragma target 4.5
-
             #pragma vertex depthOnlyVertex
             #pragma fragment depthOnlyFragment
-
             #pragma multi_compile_instancing
 
             #include "../VertToon/HLSL/Toon/VertToon_DepthOnly.hlsl"

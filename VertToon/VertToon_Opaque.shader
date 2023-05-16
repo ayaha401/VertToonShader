@@ -38,6 +38,8 @@ Shader "VertToon/Opaque"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
             #pragma multi_compile_instancing
             #pragma target 4.5
             #pragma enable_d3d11_debug_symbols

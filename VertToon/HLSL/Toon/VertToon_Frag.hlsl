@@ -8,37 +8,26 @@ float4 frag(Varyings i) : SV_Target
     // Normal
     float3 normalWS = i.normalWS;
 
-    // Light
-    float3 lightDirWS = i.lightDirWS.xyz;
-
     // Albedo
     float4 col = (float4)1.;
     float3 mainTexColor = tex2D(_MainTex, i.uv).rgb;
     col.rgb = mainTexColor;
     col *= i.vertColor;
 
-    // Diff
-    float NdotL = dot(normalWS, lightDirWS);
-    float halfLambert = NdotL * 0.5 + 0.5;
-    float diff = halfLambert;
-    col.rgb *= diff;
-
-    // Clip
-    // float cameraToObjDist = 5;
-    // float dist = distance(i.posWS,  _WorldSpaceCameraPos);
-    // float2 bayerUV = i.screenPos * _ScreenParams.xy * _BayerTex_TexelSize.xy;
-    // float dither = tex2D(_BayerTex, bayerUV).r;
-    // clip(saturate(dist/3) - dither);
+    // Light
+    float4 shadowCoord = TransformWorldToShadowCoord(i.positionWS);
+    Light mainLight = GetMainLight(shadowCoord);
+    float3 attenuatedLightColor = mainLight.color * (mainLight.distanceAttenuation * mainLight.shadowAttenuation);
+    
+    // Diffuse
+    float3 diffuseColor = LightingLambert(attenuatedLightColor, mainLight.direction, normalWS);            
+    diffuseColor = diffuseColor * 0.5 + 0.5;
+    col.rgb *= diffuseColor;
 
     // LastColor
     float4 lastCol = float4(0.0, 0.0, 0.0, 1.0);
     lastCol = col;
-
-    // TestCol
-    // float4 testCol = float4(dist, dist, dist, 1);
-
     return lastCol;
-    // return testCol;
 }
 
 #endif

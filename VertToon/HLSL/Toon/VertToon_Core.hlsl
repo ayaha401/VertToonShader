@@ -21,6 +21,7 @@ struct Varyings
     float4 vertColor : COLOR;
     float3 normalWS : NORML;
     float4 lightDirWS : TEXCOORD1; // w : 未使用
+    float3 positionWS : TEXCOORD2;
 
     UNITY_VERTEX_INPUT_INSTANCE_ID
 };
